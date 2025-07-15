@@ -1,10 +1,17 @@
-import "./Navbar.css"
-import '@fontsource/roboto/300.css'
-import '@fontsource/geist-sans';
-import { Typography, Box, useTheme, List, ListItem, ListItemIcon, CircularProgress } from "@mui/material";
-
+import { Box, Typography } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function NavBar() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Determine the current path
+    const currentPath = location.pathname;
+
+    // Determine the target path and label based on the current path
+    const targetPath = currentPath === "/about" ? "/" : "/about";
+    const targetLabel = currentPath === "/about" ? "Work" : "About";
+
     return (
         <Box
             sx={{
@@ -21,24 +28,32 @@ function NavBar() {
                 padding: "1rem",
             }}
         >
-            <Typography sx={{ 
-                color: "black",
-                fontFamily: 'Geist Sans',
-                fontWeight: "500",
-                fontSize: "1.125rem"
-                }}>
-                    Pablo Galindo
+            <Typography
+                sx={{
+                    color: "black",
+                    fontFamily: 'Geist Sans',
+                    fontWeight: "500",
+                    fontSize: "1.125rem",
+                    cursor: "pointer"
+                }}
+                onClick={() => navigate("/")}
+            >
+                Pablo Galindo
             </Typography>
-            <Typography sx={{
-                color: "black",
-                fontFamily: 'Geist Sans',
-                fontWeight: "500",
-                fontSize: "1.125rem"
-                }}>
-                    About
-                </Typography>
+            <Typography
+                sx={{
+                    color: "black",
+                    fontFamily: 'Geist Sans',
+                    fontWeight: "500",
+                    fontSize: "1.125rem",
+                    cursor: "pointer"
+                }}
+                onClick={() => navigate(targetPath)}
+            >
+                {targetLabel}
+            </Typography>
         </Box>
     );
 }
 
-export default NavBar
+export default NavBar;

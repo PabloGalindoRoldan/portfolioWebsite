@@ -1,21 +1,39 @@
+import React, { useState } from "react";
 import "./Landing.css";
 import '@fontsource/roboto/300.css';
-import '@fontsource/geist-sans';
-import { Typography, Box, useTheme, List, ListItem, ListItemIcon, CircularProgress } from "@mui/material";
+import '@fontsource/geist-sans/300.css';
+import '@fontsource/geist-sans/400.css';
+import '@fontsource/geist-sans/600.css';
+import { Typography, Box } from "@mui/material";
 import NavBar from "../NavBar";
 import ImageCard from "../ImageCard";
+import Footer from "../Footer";
 
 function Landing() {
+    const [emailCopied, setEmailCopied] = useState(false);
+
+    const handleEmailClick = () => {
+        navigator.clipboard.writeText("pablogalindo90@gmail.com").then(() => {
+            setEmailCopied(true);
+            setTimeout(() => {
+                setEmailCopied(false);
+            }, 2000);
+        });
+    };
+
     return (
-        //Contenedor
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{
+            width: "100%",
+            fontFamily: "Geist Sans",
+        }}>
             <NavBar />
+
             {/* Seccion 1 */}
             <Box sx={{ padding: "1rem" }}>
                 <Typography sx={{
                     marginTop: "10vh",
                     fontFamily: "Geist Sans",
-                    fontWeight: "800",
+                    fontWeight: 600,
                     color: "#111111",
                     fontSize: "2.2rem",
                     textAlign: "left",
@@ -24,6 +42,7 @@ function Landing() {
                     Product Design. Interfaces. Systems. Strategy. Ux. & More
                 </Typography>
             </Box>
+
             {/* seccion 2 */}
             <Box>
                 <ImageCard 
@@ -48,28 +67,61 @@ function Landing() {
             </Box>
             {/* seccion 3 */}
 
-            <Box sx={{marginTop: "10vh", padding: "1rem"}}>
-                <Typography sx={{textAlign: "left"}}>
+            <Box sx={{marginTop: "20vh", padding: "1rem"}}>
+                <Typography sx={{
+                    textAlign: "left",
+                    fontWeight: 400,
+                    fontSize: "1.125rem",
+                    lineHeight: "160%"
+                }}>
                     I'm Pablo, a spanish/argentinian developer based in Argentina with over 2 years of diverse experience in front end development and a 12 year background in law and social sciences. I specialize in crafting compelling and high quallity web products. My passion lies in creating products to be used by massive amount of people and tackling diverse challenges in the development field.
                 </Typography>
-                <Typography>
-                    more about me
+                <Typography sx={{
+                    textAlign: "left",
+                    fontWeight: 600,
+                    fontSize: "1.125rem",
+                    paddingTop: "20px",
+                    lineHeight: "160%"
+                }}>
+                    More about me
                 </Typography>
             </Box>
+
             {/* seccion 4 */}
-            <Box>
-                <Typography>
+            <Box sx={{
+                marginBottom: "20vh",
+                marginTop: "15vh",
+                padding: "1rem",
+            }}>
+                <Typography sx={{
+                    textAlign: "left",
+                    fontWeight: 400,
+                    fontSize: "1.125rem",
+                    paddingTop: "20px",
+                    lineHeight: "160%",
+                    color: "#333333"
+                }}>
                     Get in touch
+                    <span className="seccion4_clickToCopy"> (Click to copy)</span>
                 </Typography>
-                <Typography>
-                    pablogalindo90@gmail.com
+                <Typography
+                    sx={{
+                        fontSize: "6vw",
+                        textAlign: "left",
+                        fontWeight: "600",
+                        cursor: "pointer",
+                        color: emailCopied ? "green" : "inherit"
+                    }}
+                    onClick={handleEmailClick}
+                >
+                    {emailCopied ? "Email copied to clipboard" : "pablogalindo90@gmail.com"}
                 </Typography>
             </Box>
-            <Box>
-                Footer
-            </Box>
+
+            {/* footer */}
+            <Footer/>
         </Box>
-    )
+    );
 }
 
-export default Landing
+export default Landing;

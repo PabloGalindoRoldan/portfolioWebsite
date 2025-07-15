@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from './components/view/Landing';
+import About from './components/view/About';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           {/* <Navbar /> */}
           <Routes>
             <Route path="/" element={<Landing />} />
-            {/* <Route path="/microemprendimientos" element={<ViewMicroEmprendimientos />} /> */}
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </Router>
